@@ -70,7 +70,7 @@ public class InitialData implements CommandLineRunner {
 
         RealStateOrder realStateOrder = RealStateOrder.builder().orderSubscriber(s1).activity(activity3).
                 applicantName("اسلام محمد احمد").applicantAddress("شارع المعز").applicantNationId("123456-9874-1236")
-                .applicationDate(LocalDateTime.now()).applicantPhoneNumber("01552849647").businessHistory("سابقة اعمال واحدة")
+               .applicantPhoneNumber("01552849647").businessHistory("سابقة اعمال واحدة")
                 .notes("ملاحظات هنا").representativeName("اسلام احمد محمود").facilityDirectorName("محمد مصطفى الصواف").build();
         realStateOrderRepository.save(realStateOrder);
 

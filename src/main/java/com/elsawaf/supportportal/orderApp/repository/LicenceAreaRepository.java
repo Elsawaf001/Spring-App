@@ -9,4 +9,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin(origins = "http://localhost:4200")
 @RepositoryRestResource(collectionResourceRel = "licenceAreas")
 public interface LicenceAreaRepository extends JpaRepository<LicenceArea, Long> {
+    long deleteByLicenceAreaNameContainsIgnoreCase(String licenceAreaName);
+    LicenceArea findByLicenceAreaNameContainsIgnoreCase(String licenceAreaName);
+
+
 }

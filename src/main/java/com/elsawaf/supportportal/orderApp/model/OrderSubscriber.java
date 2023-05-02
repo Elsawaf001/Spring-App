@@ -1,6 +1,7 @@
 package com.elsawaf.supportportal.orderApp.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -53,7 +54,12 @@ public class OrderSubscriber {
     @Column(name = "second_phone_number")
     private String secondPhoneNumber;
 
-    public OrderSubscriber(String name , String address , String phoneNumber , String nationalId , String sector , String branch){
+    public OrderSubscriber(String name ,
+                           String address ,
+                           String phoneNumber ,
+                           String nationalId ,
+                           String sector ,
+                           String branch){
         this.name=name ;
         this.address = address;
         this.phoneNumber = phoneNumber ;
@@ -62,4 +68,31 @@ public class OrderSubscriber {
         this.branch = branch;
     }
 
+    public OrderSubscriber(String name ,
+                           String address ,
+                           String sector ,
+                           String group ,
+                           String area ,
+                           String block ,
+                           String state ,
+                           String branch ,
+                           String nationalId ,
+                           String phoneNumber ,
+                           String facilityName ,
+                           Double balance ,
+                           String secondPhoneNumber){
+        this.name = name;
+        this.address = address;
+        this.sector = sector;
+        this.group = group ;
+        this.area = area ;
+        this.block = block;
+        this.state = state ;
+        this.branch = branch ;
+        this.nationalId = nationalId ;
+        this.phoneNumber = phoneNumber ;
+        this.facilityName = facilityName ;
+        this.balance = balance ;
+        this.secondPhoneNumber = secondPhoneNumber ;
+    }
 }

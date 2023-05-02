@@ -9,4 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin(origins = "http://localhost:4200")
 @RepositoryRestResource(collectionResourceRel = "realStateOrders")
 public interface RealStateOrderRepository extends JpaRepository<RealStateOrder, Long> {
+
+
+
 }
