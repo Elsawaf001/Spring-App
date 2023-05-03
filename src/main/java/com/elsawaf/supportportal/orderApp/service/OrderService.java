@@ -77,46 +77,46 @@ public OrderSubscriber createNewSubscriber(@NotNull String name ,
                                            String secondPhoneNumber){
     OrderSubscriber orderSubscriber = new OrderSubscriber();
     orderSubscriber.setName(name);
-    if (address.isBlank() || address.isEmpty()){
+    if (address== null){
         orderSubscriber.setAddress("العنوان غير محدد ");
-    }
-    orderSubscriber.setAddress(address);
-    if (sector.isEmpty() || sector.isEmpty()) {
+    }else {orderSubscriber.setAddress(address);}
+
+    if ( sector == null) {
         orderSubscriber.setSector("القطاع غير محدد");
-    }
-    orderSubscriber.setSector(sector);
-    if (group.isEmpty() || group.isEmpty()) {
+    }else {orderSubscriber.setSector(sector);}
+
+    if (group== null ) {
         orderSubscriber.setGroup("المجموعة غير معرفة");
-    }
-    orderSubscriber.setGroup(group);
-    if (area.isEmpty() || area.isEmpty()) {
+    }else {orderSubscriber.setGroup(group);}
+
+    if (area== null) {
         orderSubscriber.setArea("القطاع غير محدد");
-    }
-    orderSubscriber.setArea(area);
-    if (block.isEmpty() || block.isEmpty()) {
+    } else {orderSubscriber.setArea(area);}
+
+    if (block== null) {
         orderSubscriber.setBlock("رقم البلوك غير معرف");
-    }
-    orderSubscriber.setBlock(block);
-    if (branch.isEmpty() || branch.isEmpty()) {
+    }else{orderSubscriber.setBlock(block);}
+
+    if (branch== null) {
         orderSubscriber.setBranch("الفرع غير محدد");
-    }
-    orderSubscriber.setBranch(branch);
-    if (nationalId.isEmpty() || nationalId.isEmpty()) {
+    } else {orderSubscriber.setBranch(branch);}
+
+    if (nationalId== null) {
         orderSubscriber.setNationalId("بطاقة الرقم القومى غير معرفة");
-    }
-    orderSubscriber.setNationalId(nationalId);
-    if (facilityName.isEmpty() || facilityName.isEmpty()) {
+    } else {orderSubscriber.setNationalId(nationalId);}
+
+    if (facilityName== null) {
         orderSubscriber.setFacilityName("اسم المنشأة غير معرف");
-    }
-    orderSubscriber.setFacilityName(facilityName);
-    if (balance.isNaN() || balance.isInfinite()) {
+    } else {orderSubscriber.setFacilityName(facilityName);}
+
+    if (balance==null) {
         orderSubscriber.setBalance(0d);
-    }
-    orderSubscriber.setBalance(balance);
-    if (secondPhoneNumber.isEmpty() || secondPhoneNumber.isEmpty()) {
+    } else {orderSubscriber.setBalance(balance);}
+
+    if (secondPhoneNumber== null) {
         orderSubscriber.setSecondPhoneNumber("لايوجد ارقام اخرى معرفة");
-    }
-    orderSubscriber.setSecondPhoneNumber(secondPhoneNumber);
+    } else {orderSubscriber.setSecondPhoneNumber(secondPhoneNumber);}
+
     orderSubscriber.setState(state);
     orderSubscriber.setPhoneNumber(phoneNumber);
     orderSubscriberRepository.save(orderSubscriber);
@@ -155,28 +155,28 @@ public IndustrialOrder createIndustrialOrder(Long subscriberId , Long activityTy
     if (licenceArea.isPresent()){
         industrialOrder.setLicenceArea(licenceArea.get());
     }
-    if (representativeName.isEmpty() || representativeName.isBlank()){
+    if (representativeName == null){
        industrialOrder.setRepresentativeName("لم يتم تسجيل اسم المندوب");
-    }
-    industrialOrder.setRepresentativeName(representativeName);
-    if (facilityDirectorName.isBlank() || facilityDirectorName.isEmpty()){
+    } else {industrialOrder.setRepresentativeName(representativeName);}
+
+    if (facilityDirectorName == null){
         industrialOrder.setFacilityDirectorName("لم يتم تسجيل اسم مدير المنشأة");
-    }
-    industrialOrder.setFacilityDirectorName(facilityDirectorName);
-    if (notes.isBlank() || notes.isEmpty()){
+    } else {industrialOrder.setFacilityDirectorName(facilityDirectorName);}
+
+    if (notes== null){
         industrialOrder.setNotes("لا توجد ملاحظات");
-    }
-    industrialOrder.setNotes(notes);
-    if (cost.isNaN()){
+    } {industrialOrder.setNotes(notes);}
+
+    if (cost==null){
         industrialOrder.setCost(0d);
-    }
-    industrialOrder.setCost(cost);
+    }else {industrialOrder.setCost(cost);}
+
     industrialOrderRepository.save(industrialOrder);
     return industrialOrder;
 
 }
 
-    public RealStateOrder createIndustrialOrder(Long subscriberId , Long activityTypeId ,
+    public RealStateOrder createRealStateOrder(Long subscriberId , Long activityTypeId ,
                                                 String applicantName, String applicantAddress,
                                                 String applicantPhoneNumber, String applicantNationId,
                                                 String businessHistory,
@@ -189,50 +189,50 @@ public IndustrialOrder createIndustrialOrder(Long subscriberId , Long activityTy
         orderSubscriber.ifPresent(realStateOrder::setOrderSubscriber);
         activity.ifPresent(realStateOrder::setActivity);
 
-        if (applicantName.isEmpty() || applicantName.isBlank()){
+        if (applicantName== null){
             realStateOrder.setApplicantName("لم يتم تسجيل اسم مقدم الطلب");
-        }
-        realStateOrder.setApplicantName(applicantName);
+        } else {realStateOrder.setApplicantName(applicantName);}
 
-        if (applicantPhoneNumber.isEmpty() || applicantPhoneNumber.isBlank()){
+
+        if (applicantPhoneNumber== null){
             realStateOrder.setApplicantPhoneNumber("لم يتم تسجيل رقم هاتف مقدم الطلب");
-        }
-        realStateOrder.setApplicantPhoneNumber(applicantPhoneNumber);
+        } else {realStateOrder.setApplicantPhoneNumber(applicantPhoneNumber);}
 
-        if (applicantAddress.isEmpty() || applicantAddress.isBlank()){
+
+        if (applicantAddress== null){
             realStateOrder.setApplicantAddress("لم يتم تسجيل عنوان مقدم الطلب");
-        }
-        realStateOrder.setApplicantAddress(applicantAddress);
+        } else {realStateOrder.setApplicantAddress(applicantAddress);}
 
-        if (applicantNationId.isEmpty() || applicantNationId.isBlank()){
+
+        if (applicantNationId== null){
             realStateOrder.setApplicantNationId("لم يتم تسجيل رقم بطاقة مقدم الطلب");
-        }
-        realStateOrder.setApplicantNationId(applicantNationId);
+        } else {realStateOrder.setApplicantNationId(applicantNationId);}
 
-        if (businessHistory.isEmpty() || businessHistory.isBlank()){
+
+        if ( businessHistory== null){
             realStateOrder.setBusinessHistory("لا توجد سابقة اعمال مسجلة");
-        }
-        realStateOrder.setBusinessHistory(businessHistory);
+        } else {realStateOrder.setBusinessHistory(businessHistory);}
+
 
 
        realStateOrder.setApplicationDate(new Date());
 
 
-        if (representativeName.isEmpty() || representativeName.isBlank()){
+        if ( representativeName== null){
             realStateOrder.setRepresentativeName("لم يتم تسجيل اسم المندوب");
-        }
-        realStateOrder.setRepresentativeName(representativeName);
+        } else {realStateOrder.setRepresentativeName(representativeName);}
 
 
-        if (facilityDirectorName.isEmpty() || facilityDirectorName.isBlank()){
+
+        if ( facilityDirectorName== null){
             realStateOrder.setFacilityDirectorName("لم يتم تسجيل اسم مدير المنشأة");
-        }
-        realStateOrder.setFacilityDirectorName(facilityDirectorName);
+        } else {realStateOrder.setFacilityDirectorName(facilityDirectorName);}
 
-        if (notes.isEmpty() || notes.isBlank()){
+
+        if (notes== null){
             realStateOrder.setNotes("لا توجد ملاحظات");
-        }
-        realStateOrder.setNotes(notes);
+        } else {realStateOrder.setNotes(notes);}
+
 
         realStateOrderRepository.save(realStateOrder);
         return realStateOrder;
