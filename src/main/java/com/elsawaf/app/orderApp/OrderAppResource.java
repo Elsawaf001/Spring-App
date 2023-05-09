@@ -1,10 +1,10 @@
-package com.elsawaf.supportportal.orderApp;
+package com.elsawaf.app.orderApp;
 
-import com.elsawaf.supportportal.domain.HttpResponse;
-import com.elsawaf.supportportal.exception.domain.UserNotFoundException;
-import com.elsawaf.supportportal.orderApp.model.*;
-import com.elsawaf.supportportal.orderApp.repository.*;
-import com.elsawaf.supportportal.orderApp.service.OrderService;
+import com.elsawaf.app.jwtAuth.domain.HttpResponse;
+import com.elsawaf.app.jwtAuth.domain.UserNotFoundException;
+import com.elsawaf.app.orderApp.model.*;
+import com.elsawaf.app.orderApp.repository.*;
+import com.elsawaf.app.orderApp.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/app")
 public class OrderAppResource {
     private final OrderSubscriberRepository orderSubscriberRepository;
@@ -29,8 +30,8 @@ public class OrderAppResource {
         return new  ResponseEntity<>(activities, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/activity")
-    public ResponseEntity<Activity> getActivity(@RequestParam(value = "id") Long id) throws UserNotFoundException {
+    @GetMapping(path = "/activity/{id}")
+    public ResponseEntity<Activity> getActivity(@PathVariable("id") Long id) throws UserNotFoundException {
         Optional<Activity> activity = activityRepository.findById(id);
         if (activity.isPresent()) {
             return new ResponseEntity<>(activity.get() , HttpStatus.OK);
@@ -69,9 +70,9 @@ public class OrderAppResource {
 
 
 
-    @DeleteMapping(path = "/deleteActivity")
+    @DeleteMapping(path = "/deleteActivity/{activityName}")
     @PreAuthorize("hasAnyAuthority('user:delete')")
-    public HttpResponse deleteActivity(@RequestParam(value = "name") String activityName){
+    public HttpResponse deleteActivity(@PathVariable(value = "activityName") String activityName){
         orderService.deleteActivity(activityName);
         return new HttpResponse(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT ,
                 HttpStatus.NO_CONTENT.getReasonPhrase().toUpperCase(),"تم حذف النشاط" );
@@ -79,14 +80,14 @@ public class OrderAppResource {
 
 
 
-    @GetMapping(path = "licences")
+    @GetMapping(path = "/licences")
     public ResponseEntity<List<LicenceArea>> getAll(){
         return new ResponseEntity<>(orderService.findAllLicenceAreas(),HttpStatus.OK);
     }
 
 
 
-    @PostMapping(path = "licence")
+    @PostMapping(path = "/licence")
     @PreAuthorize("hasAnyAuthority('user:create')")
     public ResponseEntity<LicenceArea> addLicenceArea(@RequestParam(value = "name") String name){
         LicenceArea licenceArea = orderService.addLicenceArea(name);
@@ -95,24 +96,24 @@ public class OrderAppResource {
 
 
 
-    @GetMapping(path = "findLicence")
-    public ResponseEntity<LicenceArea> findLicenceArea(@RequestParam(value = "name") String name){
+    @GetMapping(path = "findLicence/{name}")
+    public ResponseEntity<LicenceArea> findLicenceArea(@PathVariable(value = "name") String name){
         LicenceArea licenceArea = orderService.findLicenceArea(name);
         return new ResponseEntity<>(licenceArea , HttpStatus.OK);
     }
 
 
 
-    @DeleteMapping(path = "/deleteLicence")
+    @DeleteMapping(path = "/deleteLicence/{name}")
     @PreAuthorize("hasAnyAuthority('user:delete')")
-    public HttpResponse deleteLicenceArea(@RequestParam(value = "name") String name){
+    public HttpResponse deleteLicenceArea(@PathVariable(value = "name") String name){
         orderService.deleteLicenceArea(name);
         return new HttpResponse(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT ,
                 HttpStatus.NO_CONTENT.getReasonPhrase().toUpperCase(),"تم حذف منطقة التراخيص" );
     }
 
 
-    @GetMapping(path = "subscribers")
+    @GetMapping(path = "/subscribers")
     public ResponseEntity<List<OrderSubscriber>> findAllSubscribers(){
         return new ResponseEntity<>(orderSubscriberRepository.findAll(),HttpStatus.OK);
     }
@@ -140,15 +141,15 @@ public class OrderAppResource {
         return new ResponseEntity<>(subscriber,HttpStatus.OK);
     }
 
-    @GetMapping(path = "/findSubscriber")
-    public ResponseEntity<OrderSubscriber> findSubscriber(@RequestParam(value = "name") String name){
+    @GetMapping(path = "/findSubscriber/{name}")
+    public ResponseEntity<OrderSubscriber> findSubscriber(@PathVariable(value = "name") String name){
         OrderSubscriber orderSubscriber = orderService.findSubscriberByName(name);
         return new ResponseEntity<>(orderSubscriber,HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/deleteSubscriber")
     @PreAuthorize("hasAnyAuthority('user:delete')")
-    public HttpResponse deleteSubscriber(@RequestParam(value = "name") String name){
+    public HttpResponse deleteSubscriber(@PathVariable(value = "name") String name){
         orderService.deleteSubscriber(name);
         return new HttpResponse(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT ,
                 HttpStatus.NO_CONTENT.getReasonPhrase(),"تم حذف المشترك" );
