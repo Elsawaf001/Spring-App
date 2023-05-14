@@ -17,7 +17,6 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/app")
 public class OrderAppResource {
     private final OrderSubscriberRepository orderSubscriberRepository;
